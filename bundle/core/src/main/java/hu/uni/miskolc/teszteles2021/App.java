@@ -1,4 +1,4 @@
-package hu.uni.miskolc.teszteles.core;
+package hu.uni.miskolc.teszteles2021;
 
 /**
  * Hello world!
