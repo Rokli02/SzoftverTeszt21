@@ -1,4 +1,4 @@
-package hu.uni.miskolc.teszteles2021;
+package hu.uni.miskolc.teszteles2021.service;
 
 import static org.junit.Assert.assertTrue;
 

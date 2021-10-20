@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import hu.uni.miskolc.teszteles2021.enums.Kivitel;
+import hu.uni.miskolc.teszteles2021.enums.Uzemanyag;
+import hu.uni.miskolc.teszteles2021.enums.Valto;
+import hu.uni.miskolc.teszteles2021.exceptions.AjtokSzamaNemMegfelelo;
+import hu.uni.miskolc.teszteles2021.exceptions.GyartasiIdoNemMegfelelo;
+import hu.uni.miskolc.teszteles2021.exceptions.RendszamNemMegfelelo;
+
 public class Auto implements HanggalRendelkezo {
     public static Map<String, Integer> hengerurtartalomErtekek;
 
@@ -16,18 +23,18 @@ public class Auto implements HanggalRendelkezo {
     }
 
     //Adattagok
-    private String gyarto;
-    private String modell;
-    private Integer hengerurtartalom;
-    private String rendszam;
-    private Uzemanyag uzemanyag;
-    private LocalDate gyartasiIdo;
-    private String szinHex;
-    private boolean korozott;
-    private String forgalmiSzama;
-    private Valto valto;
-    private Kivitel kivitel;
-    private int ajtokSzama;
+    protected String gyarto;
+    protected String modell;
+    protected Integer hengerurtartalom;
+    protected String rendszam;
+    protected Uzemanyag uzemanyag;
+    protected LocalDate gyartasiIdo;
+    protected String szinHex;
+    protected boolean korozott;
+    protected String forgalmiSzama;
+    protected Valto valto;
+    protected Kivitel kivitel;
+    protected int ajtokSzama;
 
     @Override
     public void dudal() {
@@ -62,7 +69,12 @@ public class Auto implements HanggalRendelkezo {
         return rendszam;
     }
 
-    public void setRendszam(String rendszam) {
+    public void setRendszam(String rendszam) throws RendszamNemMegfelelo {
+    	//TODO: regex
+    	String regex = "^([^a-z0-9Q]{3}-(?!000)[0-9]{3})$";
+    	if(!rendszam.matches(regex)) {
+    		throw new RendszamNemMegfelelo(rendszam);
+    	}
         this.rendszam = rendszam;
     }
 
@@ -78,7 +90,11 @@ public class Auto implements HanggalRendelkezo {
         return gyartasiIdo;
     }
 
-    protected void setGyartasiIdo(LocalDate gyartasiIdo) {
+    protected void setGyartasiIdo(LocalDate gyartasiIdo) throws GyartasiIdoNemMegfelelo {
+    	if(gyartasiIdo.isAfter(LocalDate.now()) || 
+    	   gyartasiIdo.isBefore(LocalDate.of(1885, 1, 1))) {
+    		throw new GyartasiIdoNemMegfelelo(gyartasiIdo);
+    	}
         this.gyartasiIdo = gyartasiIdo;
     }
 
