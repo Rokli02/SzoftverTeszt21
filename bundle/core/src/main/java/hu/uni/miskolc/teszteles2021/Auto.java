@@ -64,6 +64,10 @@ public class Auto implements HanggalRendelkezo {
     public void setHengerurtartalom(String hengerurtartalom){
 		this.hengerurtartalom = hengerurtartalomErtekek.get(hengerurtartalom);
     }
+    
+    public void setHengerurtartalom(Integer hengerurtartalom) {
+    	this.hengerurtartalom = hengerurtartalom;
+    }
 
     public String getRendszam() {
         return rendszam;
@@ -148,27 +152,130 @@ public class Auto implements HanggalRendelkezo {
     	}
         this.ajtokSzama = ajtokSzama;
     }
-
+    
     public Auto(String gyarto, String modell, String hengerurtartalom, String rendszam, Uzemanyag uzemanyag,
+            LocalDate gyartasiIdo, String szinHex, boolean korozott, String forgalmiSzama, Valto valto, Kivitel kivitel,
+            int ajtokSzama) throws RendszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
+    super();
+    setGyarto(gyarto);
+    setModell(modell);
+    setHengerurtartalom(hengerurtartalom);
+    setRendszam(rendszam);
+    setUzemanyag(uzemanyag);
+    setGyartasiIdo(gyartasiIdo);
+    setSzinHex(szinHex);
+    setKorozott(korozott);
+    setForgalmiSzama(forgalmiSzama);
+    setValto(valto);
+    setKivitel(kivitel);
+    setAjtokSzama(ajtokSzama);
+}
+
+    public Auto(String gyarto, String modell, Integer hengerurtartalom, String rendszam, Uzemanyag uzemanyag,
                 LocalDate gyartasiIdo, String szinHex, boolean korozott, String forgalmiSzama, Valto valto, Kivitel kivitel,
-                int ajtokSzama) {
+                int ajtokSzama) throws RendszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
         super();
-        this.gyarto = gyarto;
-        this.modell = modell;
+        setGyarto(gyarto);
+        setModell(modell);
         setHengerurtartalom(hengerurtartalom);
-        this.rendszam = rendszam;
-        this.uzemanyag = uzemanyag;
-        this.gyartasiIdo = gyartasiIdo;
-        this.szinHex = szinHex;
-        this.korozott = korozott;
-        this.forgalmiSzama = forgalmiSzama;
-        this.valto = valto;
-        this.kivitel = kivitel;
-        this.ajtokSzama = ajtokSzama;
+        setRendszam(rendszam);
+        setUzemanyag(uzemanyag);
+        setGyartasiIdo(gyartasiIdo);
+        setSzinHex(szinHex);
+        setKorozott(korozott);
+        setForgalmiSzama(forgalmiSzama);
+        setValto(valto);
+        setKivitel(kivitel);
+        setAjtokSzama(ajtokSzama);
     }
     
     public Auto() {
     	
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ajtokSzama;
+		result = prime * result + ((forgalmiSzama == null) ? 0 : forgalmiSzama.hashCode());
+		result = prime * result + ((gyartasiIdo == null) ? 0 : gyartasiIdo.hashCode());
+		result = prime * result + ((gyarto == null) ? 0 : gyarto.hashCode());
+		result = prime * result + ((hengerurtartalom == null) ? 0 : hengerurtartalom.hashCode());
+		result = prime * result + ((kivitel == null) ? 0 : kivitel.hashCode());
+		result = prime * result + (korozott ? 1231 : 1237);
+		result = prime * result + ((modell == null) ? 0 : modell.hashCode());
+		result = prime * result + ((rendszam == null) ? 0 : rendszam.hashCode());
+		result = prime * result + ((szinHex == null) ? 0 : szinHex.hashCode());
+		result = prime * result + ((uzemanyag == null) ? 0 : uzemanyag.hashCode());
+		result = prime * result + ((valto == null) ? 0 : valto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Auto other = (Auto) obj;
+		if (ajtokSzama != other.ajtokSzama)
+			return false;
+		if (forgalmiSzama == null) {
+			if (other.forgalmiSzama != null)
+				return false;
+		} else if (!forgalmiSzama.equals(other.forgalmiSzama))
+			return false;
+		if (gyartasiIdo == null) {
+			if (other.gyartasiIdo != null)
+				return false;
+		} else if (!gyartasiIdo.equals(other.gyartasiIdo))
+			return false;
+		if (gyarto == null) {
+			if (other.gyarto != null)
+				return false;
+		} else if (!gyarto.equals(other.gyarto))
+			return false;
+		if (hengerurtartalom == null) {
+			if (other.hengerurtartalom != null)
+				return false;
+		} else if (!hengerurtartalom.equals(other.hengerurtartalom))
+			return false;
+		if (kivitel != other.kivitel)
+			return false;
+		if (korozott != other.korozott)
+			return false;
+		if (modell == null) {
+			if (other.modell != null)
+				return false;
+		} else if (!modell.equals(other.modell))
+			return false;
+		if (rendszam == null) {
+			if (other.rendszam != null)
+				return false;
+		} else if (!rendszam.equals(other.rendszam))
+			return false;
+		if (szinHex == null) {
+			if (other.szinHex != null)
+				return false;
+		} else if (!szinHex.equals(other.szinHex))
+			return false;
+		if (uzemanyag != other.uzemanyag)
+			return false;
+		if (valto != other.valto)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Auto [gyarto=" + gyarto + ", modell=" + modell + ", hengerurtartalom=" + hengerurtartalom
+				+ ", rendszam=" + rendszam + ", uzemanyag=" + uzemanyag + ", gyartasiIdo=" + gyartasiIdo + ", szinHex="
+				+ szinHex + ", korozott=" + korozott + ", forgalmiSzama=" + forgalmiSzama + ", valto=" + valto
+				+ ", kivitel=" + kivitel + ", ajtokSzama=" + ajtokSzama + "]";
+	}
+
+    
 }
